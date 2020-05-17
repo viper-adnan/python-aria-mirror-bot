@@ -1,0 +1,71 @@
+{
+  "name": "Mirror - Bot",
+  "description": "Run Mirror-Bot on Heroku",
+  "repository": "https://github.com/viper-adnan/python-aria-mirror-bot",
+  "logo": "https://telegra.ph/file/e742b80b743eaafc14ab4.jpg",
+  "keywords": ["Mirror-Bot"],
+  "stack": "container",
+  "env": {
+    "BOT_TOKEN": {
+      "description": "Get it from @BotFather"
+    },
+    "GDRIVE_FOLDER_ID": {
+      "description": "Folder id where all files are uploded.",
+      "value": "root"
+    },
+    "OWNER_ID": {
+      "description": "Telegram chat ID of Bot Owner"
+    },
+    "TELEGRAM_API": {
+      "description": "Get it from my.telegram.org , For mirroring of Telegram files."
+    },
+    "TELEGRAM_HASH": {
+      "description": "Get it from my.telegram.org , For mirroring of Telegram files."
+    },
+    "USER_SESSION_STRING": {
+      "description": "Get it by running generate_string_session.py locally."
+    },
+    "GDRIVE_TOKEN": {
+      "description": "Generate it by running generate_drive_token.py locally",
+      "required": false
+    },
+    "DOWNLOAD_DIR": {
+      "description": "Path for Downloads",
+      "value": "/app/downloads",
+      "required": false
+    },
+    "IS_TEAM_DRIVE": {
+      "description": "GDRIVE_FOLDER_ID is in TeamDrive ?",
+      "value": "False",
+      "required": false
+    },
+    "AUTH_CHATS": {
+      "description": "List of authorized chats, sepeated by space.",
+      "value": "999197022 -100991970289",
+      "required": false
+    },
+    "INDEX_URL": {
+      "description": "Get it from install.kenci.workers.dev, Format = xx.xxx.workers.dev/xx.example.com",
+      "required": false
+    },
+    "DOWNLOAD_STATUS_UPDATE_INTERVAL": {
+      "description": "Status update interval in seconds.",
+      "value": "5",
+      "required" : false
+    },
+    "AUTO_DELETE_MESSAGE_DURATION": {
+      "description": "Auto delete messages duration in seconds",
+      "value": "20",
+      "required": false
+    },
+    "USE_SERVICE_ACCOUNTS": {
+      "description": "If True, Please add accounts Folder in repo.",
+      "required": false
+    }
+  },
+  "buildpacks": [
+    {
+      "url": "heroku/python"
+    }
+  ]
+}

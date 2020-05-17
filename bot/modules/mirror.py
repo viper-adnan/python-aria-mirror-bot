@@ -170,7 +170,7 @@ def _mirror(bot, update, isTar=False):
                     listener = MirrorListener(bot, update, isTar, tag)
                     tg_downloader = TelegramDownloadHelper(listener)
                     tg_downloader.add_download(reply_to, f'{DOWNLOAD_DIR}{listener.uid}/')
-                    sendStatusMessage(update, bot)
+                    sendMessage('FILE added to the /status', bot, update)
                     if len(Interval) == 0:
                         Interval.append(setInterval(DOWNLOAD_STATUS_UPDATE_INTERVAL, update_all_messages))
                     return
@@ -188,7 +188,7 @@ def _mirror(bot, update, isTar=False):
         LOGGER.info(f'{link}: {e}')
     listener = MirrorListener(bot, update, isTar, tag)
     ariaDlManager.add_download(link, f'{DOWNLOAD_DIR}/{listener.uid}/',listener)
-    sendStatusMessage(update, bot)
+    sendMessage('URI added to the /status', bot, update)
     if len(Interval) == 0:
         Interval.append(setInterval(DOWNLOAD_STATUS_UPDATE_INTERVAL, update_all_messages))
 

@@ -14,7 +14,7 @@ URL_REGEX = r"(?:(?:https?|ftp):\/\/)?[\w/\-?=%.]+\.[\w/\-?=%.]+"
 
 class MirrorStatus:
     STATUS_UPLOADING = "Uploading"
-    STATUS_DOWNLOADING = "Downloading"
+    STATUS_DOWNLOADING = "Filename"
     STATUS_WAITING = "Queued"
     STATUS_FAILED = "Failed. Cleaning download"
     STATUS_CANCELLED = "Cancelled"
@@ -89,17 +89,16 @@ def get_readable_message():
     with download_dict_lock:
         msg = ""
         for download in list(download_dict.values()):
-            msg += f"<i>{download.name()}</i> - "
-            msg += download.status()
+            msg += f"<b>{download.status()}:</b> <code>{download.name()}</code> "
+            msg += f"\n<b>Size: </b><code>{download.size()}</code>"
             if download.status() != MirrorStatus.STATUS_ARCHIVING:
-                msg += f"\n<code>{get_progress_bar_string(download)} {download.progress()}</code> of " \
-                       f"{download.size()}" \
-                       f" at {download.speed()}, ETA: {download.eta()} "
+                msg += f"\n<code>{get_progress_bar_string(download)} {download.progress()}</code>" \
+                    f"\n<b>Speed:</b> <code>{download.speed()}</code>   <b>ETA:</b> <code>{download.eta()}</code> "
             if download.status() == MirrorStatus.STATUS_DOWNLOADING:
                 if hasattr(download, 'is_torrent'):
-                    msg += f"| P: {download.aria_download().connections} " \
-                           f"| S: {download.aria_download().num_seeders}"
-                msg += f"\nGID: <code>{download.gid()}</code>"
+                    msg += f"\n<b>Info:</b> <code>Seeders: {download.aria_download().num_seeders}</code>" \
+                           f"   <code>Peers: {download.aria_download().connections}</code>"
+                msg += f"\n<b>GiD:</b> <code>{download.gid()}</code>"
             msg += "\n\n"
         return msg
 
